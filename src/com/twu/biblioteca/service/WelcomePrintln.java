@@ -7,6 +7,7 @@ public class WelcomePrintln {
         System.out.println("you can have below choices\n\n");
         System.out.println("1:look for books");
         System.out.println("2:look for books with details");
+        System.out.println("3:choose a book you want");
         System.out.println("0:exit system");
     }
 }
