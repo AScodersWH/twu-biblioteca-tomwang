@@ -10,20 +10,20 @@ public class BookStore {
 
 
     public List<String> initialBooks() {
-        books.add("Harry-Potter");
+        books.add("HarryPotter");
         books.add("Sea");
         books.add("Sun");
-        books.add("Three-guns");
-        books.add("Sam-Ports");
+        books.add("ThreeGuns");
+        books.add("SamPorts");
         return books;
     }
 
     public List<String> initialBooksWithDetails() {
-        booksWithDetails.add("Harry-Potter-----author:-JK------time:-2012.12.28------version:--1");
-        booksWithDetails.add("Sea--------------author:-David---time:-2013.11.12------version:--1");
-        booksWithDetails.add("Sun--------------author:-Sam-----time:-2009.02.09------version:--1");
-        booksWithDetails.add("Three-guns-------author:-Jan-----time:-2007:01.22------version:--1");
-        booksWithDetails.add("Sam-Ports--------author:-Aus-----time:-2015.12.01------version:--1");
+        booksWithDetails.add("HarryPotter-----author:JK------time:2012.12.28------version:1");
+        booksWithDetails.add("Sea-------------author:David---time:2013.11.12------version:1");
+        booksWithDetails.add("Sun-------------author:Sam-----time:2009.02.09------version:1");
+        booksWithDetails.add("ThreeGuns-------author:Jan-----time:2007:01.22------version:1");
+        booksWithDetails.add("SamPorts--------author:Aus-----time:2015.12.01------version:1");
         return booksWithDetails;
     }
 
