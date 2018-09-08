@@ -1,8 +1,11 @@
 package com.twu.biblioteca;
 
-import com.twu.biblioteca.service.BookStore;
-import com.twu.biblioteca.service.MovieStore;
-import com.twu.biblioteca.service.Users;
+import com.twu.biblioteca.model.Books;
+import com.twu.biblioteca.model.Movies;
+import com.twu.biblioteca.model.Users;
+import com.twu.biblioteca.service.BookService;
+import com.twu.biblioteca.service.MovieService;
+import com.twu.biblioteca.service.UserService;
 import com.twu.biblioteca.service.WelcomePrintln;
 
 import java.util.List;
@@ -13,13 +16,15 @@ public class BibliotecaApp {
 
     public static void main(String[] args) {
         Users users = new Users();
+        UserService userService = new UserService();
+
         System.out.println("Hello World!");
         System.out.println("Please login");
         System.out.println("Please input your username : ");
         String userName = new Scanner(System.in).next();
         System.out.println("Please input your password : ");
         String passWord = new Scanner(System.in).next();
-        int status = users.login(userName,passWord);
+        int status = userService.login(users,userName,passWord);
         if(status==0){
             System.out.println("sorry you are not our users,please contact manager");
             return;
@@ -27,13 +32,14 @@ public class BibliotecaApp {
 
         WelcomePrintln welcomePrintln = new WelcomePrintln();
         welcomePrintln.welcome();
-        BookStore bookStore = new BookStore();
-        List<String> booksWithDetail = bookStore.initialBooksWithDetails();
-        List<String> book = bookStore.initialBooks();
+        Books books = new Books();
+        BookService bookService = new BookService();
+        List<String> booksWithDetail = bookService.initialBooksWithDetails(books);
+        List<String> book = bookService.initialBooks(books);
 
-        MovieStore movieStore = new MovieStore();
-        movieStore.initialMoviesWithDetails();
-
+        Movies movies = new Movies();
+        MovieService movieService = new MovieService();
+        movieService.initialMoviesWithDetails(movies);
         while (status == 1) {
             Scanner scanner = new Scanner(System.in);
             int command = Integer.valueOf(scanner.next());
@@ -41,7 +47,7 @@ public class BibliotecaApp {
 
                 System.out.println("\nhere are all books");
                 System.out.println("\n*************************\n");
-                bookStore.showBooks(book);
+                bookService.showBooks(book);
                 System.out.println("\n*************************\n");
 
                 welcomePrintln.welcome();
@@ -49,7 +55,7 @@ public class BibliotecaApp {
             if (command==2) {
                 System.out.println("\nhere are all books with details\n");
                 System.out.println("\n*************************\n");
-                bookStore.showBooks(booksWithDetail);
+                bookService.showBooks(booksWithDetail);
                 System.out.println("\n*************************\n");
 
                 welcomePrintln.welcome();
@@ -61,7 +67,7 @@ public class BibliotecaApp {
                         "please input the book you want : ");
                 String bookToLend = new Scanner(System.in).next();
 
-                System.out.println(bookStore.deleteBook(bookToLend));
+                System.out.println(bookService.deleteBook(books,bookToLend));
                 System.out.println("\n*************************\n");
                 welcomePrintln.welcome();
             }
@@ -73,7 +79,7 @@ public class BibliotecaApp {
                 System.out.println("\n**********************************\n" +
                         "please input the book with details you want to return : ");
                 String bookWithDetailsToReturn = new Scanner(System.in).next();
-                System.out.println(bookStore.returnBook(bookToReturn, bookWithDetailsToReturn));
+                System.out.println(bookService.returnBook(books,bookToReturn, bookWithDetailsToReturn));
                 System.out.println("\n*************************\n");
                 welcomePrintln.welcome();
             }
@@ -81,7 +87,7 @@ public class BibliotecaApp {
             if(command==5){
                 System.out.println("\nhere are all movies with details\n");
                 System.out.println("\n*************************\n");
-                movieStore.showBooks(movieStore.moviesWithDetails);
+                movieService.showBooks(movies.moviesWithDetails);
                 System.out.println("\n*************************\n");
 
                 welcomePrintln.welcome();
@@ -92,7 +98,7 @@ public class BibliotecaApp {
                         "please input the movie with details you want : ");
                 String movie = new Scanner(System.in).next();
 
-                System.out.println(movieStore.checkoutMovie(movie));
+                System.out.println(movieService.checkoutMovie(movies,movie));
                 System.out.println("\n*************************\n");
                 welcomePrintln.welcome();
             }
